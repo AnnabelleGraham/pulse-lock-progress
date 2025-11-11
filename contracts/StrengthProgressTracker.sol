@@ -49,11 +49,11 @@ contract StrengthProgressTracker is SepoliaConfig {
         userRecords[msg.sender].push(newRecord);
 
         // Allow contract and user to decrypt
-        // FHE.allowThis(weight); // BUG: Removed to break decryption
+        FHE.allowThis(weight);
         FHE.allow(weight, msg.sender);
-        // FHE.allowThis(sets); // BUG: Removed to break decryption
+        FHE.allowThis(sets);
         FHE.allow(sets, msg.sender);
-        // FHE.allowThis(reps); // BUG: Removed to break decryption
+        FHE.allowThis(reps);
         FHE.allow(reps, msg.sender);
     }
 
