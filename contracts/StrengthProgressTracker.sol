@@ -4,10 +4,18 @@ pragma solidity ^0.8.24;
 import {FHE, euint32, externalEuint32} from "@fhevm/solidity/lib/FHE.sol";
 import {SepoliaConfig} from "@fhevm/solidity/config/ZamaConfig.sol";
 
+/**
+ * @title Gas-Optimized Strength Progress Tracker
+ * @dev Implements FHE for privacy-preserving fitness tracking
+ */
+
 /// @title Encrypted Strength Progress Tracker
 /// @author Strength Tracker Team
 /// @notice A contract for storing encrypted strength training data (max weight, sets, reps)
 contract StrengthProgressTracker is SepoliaConfig {
+    // Constants for gas optimization
+    uint256 private constant MAX_RECORDS_PER_USER = 1000;
+
     // Structure to store encrypted training data
     struct TrainingRecord {
         euint32 maxWeight;  // Maximum weight in encrypted form
@@ -18,6 +26,9 @@ contract StrengthProgressTracker is SepoliaConfig {
 
     // Mapping from user address to their training records
     mapping(address => TrainingRecord[]) private userRecords;
+
+    // Events for better UX
+    event TrainingRecorded(address indexed user, uint256 recordIndex, uint256 timestamp);
 
     /// @notice Record a new strength training session
     /// @param encryptedWeight The encrypted maximum weight
@@ -46,6 +57,9 @@ contract StrengthProgressTracker is SepoliaConfig {
             timestamp: block.timestamp
         });
 
+        // Prevent excessive record storage to optimize gas costs
+        require(userRecords[msg.sender].length < MAX_RECORDS_PER_USER, "Maximum records per user exceeded");
+
         userRecords[msg.sender].push(newRecord);
 
         // Allow contract and user to decrypt
@@ -55,6 +69,9 @@ contract StrengthProgressTracker is SepoliaConfig {
         FHE.allow(sets, msg.sender);
         FHE.allowThis(reps);
         FHE.allow(reps, msg.sender);
+
+        // Emit event for better frontend tracking
+        emit TrainingRecorded(msg.sender, userRecords[msg.sender].length - 1, newRecord.timestamp);
     }
 
     /// @notice Get the number of training records for a user
