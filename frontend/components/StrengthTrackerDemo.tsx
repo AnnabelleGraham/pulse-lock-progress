@@ -47,6 +47,7 @@ export const StrengthTrackerDemo = () => {
   const [weight, setWeight] = useState<string>("");
   const [sets, setSets] = useState<string>("");
   const [reps, setReps] = useState<string>("");
+  const [formErrors, setFormErrors] = useState<{weight?: string, sets?: string, reps?: string}>({});
 
   const buttonClass =
     "inline-flex items-center justify-center rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white shadow-sm " +
@@ -77,25 +78,40 @@ export const StrengthTrackerDemo = () => {
     return errorNotDeployed(chainId);
   }
 
-  const handleRecord = () => {
+  const validateForm = () => {
+    const errors: {weight?: string, sets?: string, reps?: string} = {};
     const weightNum = parseInt(weight);
     const setsNum = parseInt(sets);
     const repsNum = parseInt(reps);
 
-    if (isNaN(weightNum) || isNaN(setsNum) || isNaN(repsNum)) {
-      alert("Please enter valid numbers");
+    if (isNaN(weightNum) || weightNum <= 0) {
+      errors.weight = "Please enter a valid weight greater than 0";
+    }
+    if (isNaN(setsNum) || setsNum <= 0) {
+      errors.sets = "Please enter a valid number of sets greater than 0";
+    }
+    if (isNaN(repsNum) || repsNum <= 0) {
+      errors.reps = "Please enter a valid number of reps greater than 0";
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleRecord = () => {
+    if (!validateForm()) {
       return;
     }
 
-    if (weightNum <= 0 || setsNum <= 0 || repsNum <= 0) {
-      alert("All values must be greater than 0");
-      return;
-    }
+    const weightNum = parseInt(weight);
+    const setsNum = parseInt(sets);
+    const repsNum = parseInt(reps);
 
     strengthTracker.recordTraining(weightNum, setsNum, repsNum);
     setWeight("");
     setSets("");
     setReps("");
+    setFormErrors({});
   };
 
   const formatDate = (timestamp: bigint) => {
@@ -115,12 +131,15 @@ export const StrengthTrackerDemo = () => {
             </label>
             <input
               type="number"
-              className={inputClass}
+              className={`${inputClass} ${formErrors.weight ? 'border-red-500' : ''}`}
               value={weight}
               onChange={(e) => setWeight(e.target.value)}
               placeholder="100"
               min="1"
             />
+            {formErrors.weight && (
+              <p className="text-red-500 text-xs mt-1">{formErrors.weight}</p>
+            )}
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -128,12 +147,15 @@ export const StrengthTrackerDemo = () => {
             </label>
             <input
               type="number"
-              className={inputClass}
+              className={`${inputClass} ${formErrors.sets ? 'border-red-500' : ''}`}
               value={sets}
               onChange={(e) => setSets(e.target.value)}
               placeholder="3"
               min="1"
             />
+            {formErrors.sets && (
+              <p className="text-red-500 text-xs mt-1">{formErrors.sets}</p>
+            )}
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -141,12 +163,15 @@ export const StrengthTrackerDemo = () => {
             </label>
             <input
               type="number"
-              className={inputClass}
+              className={`${inputClass} ${formErrors.reps ? 'border-red-500' : ''}`}
               value={reps}
               onChange={(e) => setReps(e.target.value)}
               placeholder="10"
               min="1"
             />
+            {formErrors.reps && (
+              <p className="text-red-500 text-xs mt-1">{formErrors.reps}</p>
+            )}
           </div>
         </div>
         <button
