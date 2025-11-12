@@ -5,6 +5,7 @@ import heroBg from "@/assets/hero-bg.jpg";
 const Hero = () => {
   return (
     <section 
+      id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
       style={{
         backgroundImage: `url(${heroBg})`,
@@ -41,11 +42,27 @@ const Hero = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-            <Button variant="hero" size="xl" className="gap-2 min-w-[200px]">
+            <Button 
+              variant="hero" 
+              size="xl" 
+              className="gap-2 min-w-[200px]"
+              onClick={() => {
+                const element = document.getElementById('workouts');
+                if (element) element.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
               <Lock className="h-5 w-5" />
               Start Training
             </Button>
-            <Button variant="outline" size="xl" className="gap-2 min-w-[200px]">
+            <Button 
+              variant="outline" 
+              size="xl" 
+              className="gap-2 min-w-[200px]"
+              onClick={() => {
+                const element = document.getElementById('dashboard');
+                if (element) element.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
               <TrendingUp className="h-5 w-5" />
               View Dashboard
             </Button>

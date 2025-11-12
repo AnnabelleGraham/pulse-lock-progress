@@ -6,13 +6,25 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Lock, Activity } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { useWallet } from "@/hooks/useWallet";
 
 const WorkoutLog = () => {
   const { toast } = useToast();
+  const { isConnected, connectWallet } = useWallet();
   const [workoutType, setWorkoutType] = useState("");
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!isConnected) {
+      toast({
+        title: "Wallet Not Connected",
+        description: "Please connect your wallet to log workouts.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
     toast({
       title: "Workout Logged & Encrypted",
       description: "Your workout data has been securely encrypted and stored.",
@@ -95,12 +107,25 @@ const WorkoutLog = () => {
               </div>
               
               <div className="pt-4 space-y-3">
-                <Button type="submit" variant="hero" className="w-full gap-2" size="lg">
-                  <Lock className="h-5 w-5" />
-                  Encrypt & Submit
-                </Button>
+                {isConnected ? (
+                  <Button type="submit" variant="hero" className="w-full gap-2" size="lg">
+                    <Lock className="h-5 w-5" />
+                    Encrypt & Submit
+                  </Button>
+                ) : (
+                  <Button 
+                    type="button" 
+                    variant="neon" 
+                    className="w-full gap-2" 
+                    size="lg"
+                    onClick={connectWallet}
+                  >
+                    <Lock className="h-5 w-5" />
+                    Connect Wallet to Submit
+                  </Button>
+                )}
                 <p className="text-xs text-center text-muted-foreground">
-                  Requires Rainbow Wallet connection • Data encrypted with your private key
+                  Requires Web3 Wallet connection • Data encrypted with your private key
                 </p>
               </div>
             </form>

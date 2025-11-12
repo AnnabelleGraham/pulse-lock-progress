@@ -13,7 +13,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="border-t border-border/50 bg-card/30 backdrop-blur-sm">
+    <footer id="stats" className="border-t border-border/50 bg-card/30 backdrop-blur-sm">
       {/* Weekly Progress Bar */}
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-2xl mx-auto">
@@ -93,7 +93,7 @@ const Footer = () => {
             <p>© 2025 FitLock. All rights reserved.</p>
             <div className="flex items-center gap-2">
               <Lock className="h-4 w-4 text-primary" />
-              <span>Powered by Rainbow Wallet</span>
+              <span>Powered by Web3 Wallet</span>
             </div>
           </div>
         </div>
