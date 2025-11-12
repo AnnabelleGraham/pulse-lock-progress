@@ -119,12 +119,12 @@ export const StrengthTrackerDemo = () => {
   };
 
   return (
-    <div className="grid w-full gap-6 px-4">
-      <div className="col-span-full bg-white rounded-lg shadow-lg p-6">
+    <div className="grid w-full gap-6 mobile-px-4 px-4">
+      <div className="col-span-full bg-white rounded-lg shadow-lg p-4 sm:p-6">
         <h2 className="text-2xl font-bold text-gray-800 mb-4">
           Record Training Session
         </h2>
-        <div className="grid grid-cols-3 gap-4 mb-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Max Weight (kg)
@@ -281,7 +281,7 @@ export const StrengthTrackerDemo = () => {
                   )}
                 </div>
                 {record.decrypted ? (
-                  <div className="grid grid-cols-3 gap-4 mt-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-2">
                     <div className="bg-blue-50 p-3 rounded">
                       <p className="text-xs text-gray-600">Weight</p>
                       <p className="text-lg font-bold text-blue-700">
