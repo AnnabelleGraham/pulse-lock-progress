@@ -89,6 +89,7 @@ export const useStrengthTracker = (parameters: {
   const [isRecording, setIsRecording] = useState<boolean>(false);
   const [isDecrypting, setIsDecrypting] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
 
   const strengthTrackerRef = useRef<StrengthTrackerInfoType | undefined>(
     undefined
@@ -242,6 +243,9 @@ export const useStrengthTracker = (parameters: {
         return;
       }
 
+      // Clear previous errors
+      setError(null);
+
       const thisChainId = chainId;
       const thisStrengthTrackerAddress = strengthTracker.address;
       const thisEthersSigner = ethersSigner;
@@ -353,14 +357,19 @@ export const useStrengthTracker = (parameters: {
         } catch (e) {
           const error = e as Error;
           const errorMsg = error.message || String(e);
+          const errorObj = { message: errorMsg, timestamp: Date.now() };
 
           // Provide more helpful error messages
           if (errorMsg.includes("FHEVM Relayer unavailable")) {
             setMessage(errorMsg);
+            setError(JSON.stringify(errorObj));
           } else if (errorMsg.includes("Relayer didn't response") || errorMsg.includes("Bad JSON")) {
-            setMessage(`Failed to record training: FHEVM Relayer service error. The Sepolia testnet relayer (https://relayer.testnet.zama.cloud) may be temporarily unavailable. Please try again later or switch to local Hardhat network (chainId: 31337) for development. Original error: ${errorMsg}`);
+            const helpfulMsg = `Failed to record training: FHEVM Relayer service error. The Sepolia testnet relayer (https://relayer.testnet.zama.cloud) may be temporarily unavailable. Please try again later or switch to local Hardhat network (chainId: 31337) for development. Original error: ${errorMsg}`;
+            setMessage(helpfulMsg);
+            setError(JSON.stringify({...errorObj, message: helpfulMsg}));
           } else {
             setMessage("Failed to record training: " + errorMsg);
+            setError(JSON.stringify(errorObj));
           }
         } finally {
           isRecordingRef.current = false;
@@ -578,5 +587,6 @@ export const useStrengthTracker = (parameters: {
     isRecording,
     isDecrypting,
     message,
+    error,
   };
 };
