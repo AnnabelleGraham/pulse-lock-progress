@@ -22,6 +22,19 @@ const config: HardhatUserConfig = {
   namedAccounts: {
     deployer: 0,
   },
+  solidity: {
+    version: "0.8.24",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 200,
+        details: {
+          yul: false,
+        },
+      },
+      viaIR: true,
+    },
+  },
   etherscan: {
     apiKey: {
       sepolia: vars.get("ETHERSCAN_API_KEY", ""),
@@ -32,6 +45,8 @@ const config: HardhatUserConfig = {
     enabled: process.env.REPORT_GAS ? true : false,
     excludeContracts: [],
     gasPrice: 20,
+    showTimeSpent: true,
+    showMethodSig: true,
   },
   networks: {
     hardhat: {
