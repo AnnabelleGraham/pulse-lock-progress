@@ -239,7 +239,7 @@ This project is licensed under the BSD-3-Clause-Clear License.
 ## Support & Resources
 
 - **Live Demo**: [https://fitness-kappa-dusky.vercel.app/](https://fitness-kappa-dusky.vercel.app/)
-- **Demo Video**: Check repository for video walkthrough
+- **Demo Video**: [Watch the full demo walkthrough](https://github.com/AnnabelleGraham/pulse-lock-progress/blob/main/fitness.mp4)
 - **FHEVM Documentation**: [docs.zama.ai](https://docs.zama.ai)
 - **Zama Community**: [Discord](https://discord.gg/zama)
 - **GitHub Issues**: [Report bugs](https://github.com/AnnabelleGraham/pulse-lock-progress/issues)
