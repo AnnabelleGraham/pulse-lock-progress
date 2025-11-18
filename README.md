@@ -8,7 +8,7 @@ An encrypted strength training progress tracker built with FHEVM (Fully Homomorp
 
 **Deployed Application**: [https://fitness-kappa-dusky.vercel.app/](https://fitness-kappa-dusky.vercel.app/)
 
-**Demo Video**: [Watch the full demo walkthrough](https://github.com/AnnabelleGraham/pulse-lock-progress/blob/main/fitness.mp4)
+**Demo Video**: [Watch the full demo walkthrough](https://github.com/AnnabelleGraham/pulse-lock-progress/blob/main/fitness.mp4) | [Download Video](https://github.com/AnnabelleGraham/pulse-lock-progress/raw/main/fitness.mp4)
 
 ## 📋 Contract Information
 
@@ -239,7 +239,7 @@ This project is licensed under the BSD-3-Clause-Clear License.
 ## Support & Resources
 
 - **Live Demo**: [https://fitness-kappa-dusky.vercel.app/](https://fitness-kappa-dusky.vercel.app/)
-- **Demo Video**: [Watch the full demo walkthrough](https://github.com/AnnabelleGraham/pulse-lock-progress/blob/main/fitness.mp4)
+- **Demo Video**: [Watch the full demo walkthrough](https://github.com/AnnabelleGraham/pulse-lock-progress/blob/main/fitness.mp4) | [Download Video](https://github.com/AnnabelleGraham/pulse-lock-progress/raw/main/fitness.mp4)
 - **FHEVM Documentation**: [docs.zama.ai](https://docs.zama.ai)
 - **Zama Community**: [Discord](https://discord.gg/zama)
 - **GitHub Issues**: [Report bugs](https://github.com/AnnabelleGraham/pulse-lock-progress/issues)
