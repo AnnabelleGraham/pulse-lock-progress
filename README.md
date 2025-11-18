@@ -8,7 +8,7 @@ An encrypted strength training progress tracker built with FHEVM (Fully Homomorp
 
 **Deployed Application**: [https://fitness-kappa-dusky.vercel.app/](https://fitness-kappa-dusky.vercel.app/)
 
-**Demo Video**: [Watch the full demo walkthrough](https://github.com/AnnabelleGraham/pulse-lock-progress/blob/main/demo-video.mp4) (Coming Soon - Check repository for video file)
+**Demo Video**: [Watch the full demo walkthrough](https://github.com/AnnabelleGraham/pulse-lock-progress/blob/main/fitness.mp4)
 
 ## 📋 Contract Information
 
